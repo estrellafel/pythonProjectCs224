@@ -20,7 +20,7 @@ params = {'term': 'food',
 
 @app.route("/")
 def home():
-    general_api()
+    #general_api()
     return render_template('home.html', error = error)
 
 def general_api():
