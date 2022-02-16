@@ -5,11 +5,15 @@
     </head>
     <body>
         <h1>Funky Fresh Finder</h1>
-        <form>
+        <form action="{{url_for("getForm")}}" method="post">
             <label for="foodType">Food Type</label>
             <input type="text" name="foodType" id="foodType" >
             <label for="location">Location</label>
             <input type="'text" name="location" id="location">
+            <button type="submit">Submit</button>
         </form>
+        {% if name %}
+        <h2 id="rName">Random Restruant: {{name}}</h2>
+        {% endif %}
     </body>
 </html>
