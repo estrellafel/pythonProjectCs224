@@ -24,16 +24,22 @@ def home():
 
 @app.route('/', methods =["GET", "POST"])
 def getForm():
-    term = request.form.get('foodType')
+    # Get info from form
+    term = request.form.get('term')
     location = request.form.get('location')
-    print(term + " " + location)
+    latitude = request.form.get('latitude')
+    longitude = request.form.get('longitude')
+    # Set params
     params['term'] = term
     params['location'] = location
+    params['latitude'] = latitude
+    params['longitude'] = longitude
     params['limit'] = 50
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
     data = response.json()
     randBusiness = data['businesses'][randint(0,len(data['businesses']) - 1)]
-    return render_template('home.html', error = error, name = randBusiness['name'])
+    print(randBusiness['image_url'])
+    return render_template('home.html', error = error, name = randBusiness['name'], imgUrl = randBusiness['image_url'])
 
 
 def general_api():

@@ -8,3 +8,9 @@ h2 {
     font-size: 2em;
     color: blue;
 }
+
+div > img.yelpImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
