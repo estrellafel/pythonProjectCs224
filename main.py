@@ -11,7 +11,7 @@ import requests
 
 app = Flask(__name__)
 
-# Put in your the api_key
+# Put in your the api_key here
 api_key = ''
 headers = {'Authorization': 'Bearer {}'.format(api_key)}
 search_api_url = 'https://api.yelp.com/v3/businesses/search'
