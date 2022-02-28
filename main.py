@@ -4,16 +4,17 @@ Main python file for our flask project
 @author: Felix Estrella
 """
 
+from ast import For
 from distutils.log import error
 from random import randint
 from flask import Flask, render_template, request
 import requests
-import Form_Data
+from Form_Data import Form_Data
 
 app = Flask(__name__)
 
 # Put in your the api_key here
-api_key = ''
+api_key = 'Iu6RMASUHPZgnXkTKsopdmBGiQK9ht97MCXkyFX_ciEltMPd3YcleBYZHmMcmlrwSmdJqAf_YOv7-CuzP6L64k1Vo64fLATAqoKVYAGwJ3ddbmQ1YmAzBku_Y9sKYnYx'
 headers = {'Authorization': 'Bearer {}'.format(api_key)}
 search_api_url = 'https://api.yelp.com/v3/businesses/search'
 params = {}
@@ -25,23 +26,33 @@ def home():
 
 @app.route('/', methods =["GET", "POST"])
 def get_form():
+    # Create form object
+    fd = Form_Data()
     # Get info from form
-    term = request.form.get('term')
-    location = request.form.get('location')
-    latitude = request.form.get('latitude')
-    longitude = request.form.get('longitude')
+    fd.set_term(request.form.get('term'))
+    fd.set_location(request.form.get('location'))
+    fd.set_latitude(request.form.get('latitude'))
+    fd.set_longitude(request.form.get('longitude'))
+    fd.set_radius(request.form.get('radius'))
+    fd.set_categories(request.form.get('categories'))
+    fd.set_price(request.form.get('price'))
     # Set params
-    params['term'] = term
-    params['location'] = location
-    params['latitude'] = latitude
-    params['longitude'] = longitude
-    params['limit'] = 50
+    fill_params(fd)
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
     data = response.json()
     randBusiness = data['businesses'][randint(0,len(data['businesses']) - 1)]
     print(randBusiness['image_url'])
     return render_template('home.html', error = error, name = randBusiness['name'], imgUrl = randBusiness['image_url'])
 
+def fill_params(fd):
+    params['term'] = fd.term
+    params['location'] = fd.location
+    params['latitude'] = fd.latitude
+    params['longitude'] = fd.longitude
+    params['radius'] = fd.radius
+    params['categories'] = fd.categories
+    params['price'] = fd.price
+    params['limit'] = 50
 
 def general_api():
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
