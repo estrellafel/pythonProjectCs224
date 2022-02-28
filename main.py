@@ -8,6 +8,7 @@ from distutils.log import error
 from random import randint
 from flask import Flask, render_template, request
 import requests
+import Form_Data
 
 app = Flask(__name__)
 
@@ -23,7 +24,7 @@ def home():
     return render_template('home.html', error = error)
 
 @app.route('/', methods =["GET", "POST"])
-def getForm():
+def get_form():
     # Get info from form
     term = request.form.get('term')
     location = request.form.get('location')

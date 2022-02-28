@@ -5,7 +5,7 @@
     </head>
     <body>
         <h1>Funky Fresh Finder</h1>
-        <form action="{{url_for("getForm")}}" method="post">
+        <form action="{{url_for("get_form")}}" method="post">
             <label for="term">Food Type</label>
             <input type="text" name="term" id="term" >
             <label for="location">Location</label>
@@ -18,8 +18,8 @@
             <input type="number" name="radius" id="radius">
             <label for="categories">Categories</label>
             <input type="text" name="categories" id="categories">
-            <label for="Price">Price</label>
-            <input type="range" min="1" max="5" value="3" name="categories" id="categories">
+            <label for="price">Price</label>
+            <input type="range" min="1" max="5" value="3" name="price" id="price">
             <button type="submit">Submit</button>
         </form>
         {% if name %}
