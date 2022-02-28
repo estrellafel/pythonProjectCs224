@@ -1,5 +1,3 @@
-from nis import cat
-
 
 class Form_Data:
     def __init__(self):
