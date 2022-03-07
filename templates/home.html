@@ -11,9 +11,9 @@
             <label for="location">Location</label>
             <input type="text" name="location" id="location">
             <label for="latitude">Latitude</label>
-            <input type="number" name="latitude" id="latitude">
+            <input type="number" name="latitude" id="latitude" step="any">
             <label for="longitude">Longitude</label>
-            <input type="number" name="longitude" id="longitude">
+            <input type="number" name="longitude" id="longitude" step="any">
             <label for="radius">Radius</label>
             <input type="number" name="radius" id="radius">
             <label for="categories">Categories</label>
@@ -23,12 +23,15 @@
             <button type="submit">Submit</button>
         </form>
         {% if name %}
-        <h2 id="rName">Random Restruant: {{name}}</h2>
+        <h2 id="rName">Random Restaurant: {{name}}</h2>
         {% endif %}
         {% if imgUrl%}
         <div>
             <img src="{{ imgUrl }}" alt="Image" class="yelpImg">
         </div>
+        {% endif %}
+        {% if errorMsg %}
+        <h2 id="rError">Uh oh! {{errorMsg}}</h2>
         {% endif %}
     </body>
 </html>
