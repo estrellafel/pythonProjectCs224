@@ -7,7 +7,7 @@ Main python file for our flask project
 from distutils.log import error
 from random import randint
 from flask import Flask, render_template, request
-import requests
+import requests, validate
 
 app = Flask(__name__)
 
@@ -24,8 +24,11 @@ def home():
 
 @app.route('/', methods =["GET", "POST"])
 def get_form():
-    # Get params
+    # Get input from the form and parse that into a dictionary for the request
     params = get_params(request.form)
+    if params == None:
+        return render_template('home.html', error = error, errorMsg = 'Error while parsing user input!')
+    
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
     data = response.json()
     if data is None or 'total' not in data.keys():
@@ -34,32 +37,43 @@ def get_form():
         return render_template('home.html', error = error, errorMsg = 'no businesses found')
     randBusiness = data['businesses'][randint(0,len(data['businesses']) - 1)]
     print(randBusiness['image_url'])
-    return render_template('home.html', error = error, name = randBusiness['name'], imgUrl = randBusiness['image_url'])
+    return render_template('home.html', error = error, name = randBusiness['name'], imgUrl = randBusiness['image_url'])    
 
+# Attempts to get dictionary of valid data.  
+# If valid data entered will return the dictionary, otherwise returns None
 def get_params(form):
-    # Get info from form
+    # Get raw unvalidated input from form
     term = form.get('term')
     location = form.get('location')
     latitude = form.get('latitude')
     longitude = form.get('longitude')
     radius = form.get('radius')
     categories = form.get('categories')
+    price = form.get('price')
     
+    # Parse unvalidated input and store valid input in params dictionary
     params = {}
     params['term'] = term
-    if location == '':
-        params['latitude'] = float(latitude)
-        params['longitude'] = float(longitude)
-    else:
+    params['limit'] = 50 # Always limit results
+    
+    if location != None and location != '': # If a direct location is available, use that
         params['location'] = location
-    if radius != None and radius != '':
-        params['radius'] = int(min(max(float(radius) * 1609.34, 0), 40000))
-    if categories != None and categories != '':
+    else: # Otherwise try to use latitude / longitude
+        if validate.is_valid_float(latitude) and validate.is_valid_float(longitude):
+            params['latitude'] = float(latitude)
+            params['longitude'] = float(longitude)
+        else:
+            return None
+    
+    # For these entries if invalid data is encountered, it is just not included in params
+    if validate.is_valid_float(radius): # If a radius is provided, try to use it
+            params['radius'] = int(min(max(float(radius) * 1609.34, 0), 40000)) 
+    if categories != None and categories != '': # If a category is provided, use it
         params['categories'] = categories
-    params['limit'] = 50
+    if validate.is_valid_int(price): # If a price range is provided, try to use it
+            params['price'] = validate.parse_price(price)
     
     return params
-    
 
 def general_api():
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
