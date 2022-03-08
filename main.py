@@ -15,7 +15,7 @@ app = Flask(__name__)
 api_key = ''
 headers = {'Authorization': 'Bearer {}'.format(api_key)}
 search_api_url = 'https://api.yelp.com/v3/businesses/search'
-params = {}
+# params = {}
 
 @app.route("/")
 def home():
@@ -24,22 +24,8 @@ def home():
 
 @app.route('/', methods =["GET", "POST"])
 def get_form():
-    # Get info from form
-    term = request.form.get('term')
-    location = request.form.get('location')
-    latitude = request.form.get('latitude')
-    longitude = request.form.get('longitude')
-    radius = request.form.get('radius')
-    # Set params
-    params['term'] = term
-    if location == '':
-        params['latitude'] = float(latitude)
-        params['longitude'] = float(longitude)
-    else:
-        params['location'] = location
-    if radius != None and radius != '':
-        params['radius'] = int(min(max(float(radius) * 1609.34, 0), 40000))
-    params['limit'] = 50
+    # Get params
+    params = get_params(request.form)
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
     data = response.json()
     if data is None or 'total' not in data.keys():
@@ -50,6 +36,30 @@ def get_form():
     print(randBusiness['image_url'])
     return render_template('home.html', error = error, name = randBusiness['name'], imgUrl = randBusiness['image_url'])
 
+def get_params(form):
+    # Get info from form
+    term = form.get('term')
+    location = form.get('location')
+    latitude = form.get('latitude')
+    longitude = form.get('longitude')
+    radius = form.get('radius')
+    categories = form.get('categories')
+    
+    params = {}
+    params['term'] = term
+    if location == '':
+        params['latitude'] = float(latitude)
+        params['longitude'] = float(longitude)
+    else:
+        params['location'] = location
+    if radius != None and radius != '':
+        params['radius'] = int(min(max(float(radius) * 1609.34, 0), 40000))
+    if categories != None and categories != '':
+        params['categories'] = categories
+    params['limit'] = 50
+    
+    return params
+    
 
 def general_api():
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
