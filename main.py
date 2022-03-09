@@ -45,8 +45,6 @@ def get_params(form):
     # Get raw unvalidated input from form
     term = form.get('term')
     location = form.get('location')
-    latitude = form.get('latitude')
-    longitude = form.get('longitude')
     radius = form.get('radius')
     categories = form.get('categories')
     price = form.get('price')
@@ -58,12 +56,8 @@ def get_params(form):
     
     if location != None and location != '': # If a direct location is available, use that
         params['location'] = location
-    else: # Otherwise try to use latitude / longitude
-        if validate.is_valid_float(latitude) and validate.is_valid_float(longitude):
-            params['latitude'] = float(latitude)
-            params['longitude'] = float(longitude)
-        else:
-            return None
+    else: # Otherwise throw an error to enter location
+        return render_template('home.html', error = error, errorMsg = 'error when getting dictionary response from yelp')
     
     # For these entries if invalid data is encountered, it is just not included in params
     if validate.is_valid_float(radius): # If a radius is provided, try to use it
