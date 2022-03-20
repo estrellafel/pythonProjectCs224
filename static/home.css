@@ -1,3 +1,6 @@
+body {
+    background-color: #2d2d30;
+}
 h1 {
     color: red;
     margin: 0 auto;
@@ -13,4 +16,37 @@ div > img.yelpImg {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+body > form {
+    background-color: white;
+    border-radius: 25px;
+}
+
+body > form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items:center;
+}
+
+body > form > div.group {
+    width: 100%;
+}
+
+body > form > div.group > input {
+    width: 30vw;
+    background-color: #2d2d30;
+    color: white;
+    margin-bottom: 5vh;
+    margin-right: 10vw;
+    float: right;
+    text-align: center;
+}
+
+body > form > div.group > label {
+    color: black;
+    font-size: 2em;
+    float: left;
+    margin-left: 10vw;
 }

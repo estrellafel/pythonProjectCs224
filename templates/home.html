@@ -6,17 +6,29 @@
     <body>
         <h1>Funky Fresh Finder</h1>
         <form action="{{url_for("get_form")}}" method="post">
-            <label for="term">Food Type</label>
-            <input type="text" name="term" id="term" >
-            <label for="location">Location</label>
-            <input type="text" name="location" id="location">
-            <label for="radius">Radius</label>
-            <input type="number" name="radius" id="radius" step="any">
-            <label for="categories">Categories</label>
-            <input type="text" name="categories" id="categories">
-            <label for="price">Price</label>
-            <input type="range" min="1" max="4" value="4" name="price" id="price">
-            <button type="submit">Submit</button>
+            <div class="group">
+                <label for="term">Food Type</label>
+                <input type="text" name="term" id="term">
+            </div>
+            <div class="group">
+                <label for="location">Location</label>
+                <input type="text" name="location" id="location">
+            </div>
+            <div class="group">
+                <label for="radius">Radius</label>
+                <input type="number" name="radius" id="radius" step="any">
+            </div>
+            <div class="group">
+                <label for="categories">Categories</label>
+                <input type="text" name="categories" id="categories">
+            </div>
+            <div class="group">
+                <label for="price">Price</label>
+                <input type="text" name="price" id="price">
+            </div>
+            <div class="group">
+                <button type="submit">Submit</button>
+            </div>
         </form>
         {% if name %}
         <h2 id="rName">Random Restaurant: {{name}}</h2>
