@@ -5,6 +5,7 @@ h1 {
     color: red;
     margin: 0 auto;
     text-align: center;
+    margin-bottom: 4vh;
 }
 
 h2 {
@@ -21,32 +22,31 @@ div > img.yelpImg {
 body > form {
     background-color: white;
     border-radius: 25px;
-}
-
-body > form {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items:center;
+    width: 80vw;
+    margin: auto;
 }
 
 body > form > div.group {
     width: 100%;
+    text-align: center;
 }
 
 body > form > div.group > input {
-    width: 30vw;
+    width: 50vw;
     background-color: #2d2d30;
     color: white;
-    margin-bottom: 5vh;
-    margin-right: 10vw;
-    float: right;
+    margin: auto;
+    display: block;
+    margin-bottom: 2vh;
+    margin-top: 1vh;
     text-align: center;
 }
 
 body > form > div.group > label {
     color: black;
     font-size: 2em;
-    float: left;
-    margin-left: 10vw;
 }
