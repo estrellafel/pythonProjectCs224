@@ -25,7 +25,7 @@ body > form {
     flex-flow: row wrap;
     justify-content: center;
     align-items:center;
-    width: 80vw;
+    width: 60vw;
     margin: auto;
 }
 
@@ -48,4 +48,16 @@ body > form > div.group > input {
 body > form > div.group > label {
     color: black;
     font-size: 2em;
+}
+
+body > form > div.group > button {
+    background-color: #2d2d30;
+    color: white;
+    font-size: 2em;
+    border: 0;
+}
+
+body > form > div.group > button:hover {
+    background-color: gray;
+    cursor: pointer;
 }
