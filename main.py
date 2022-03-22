@@ -12,7 +12,7 @@ import requests, validate
 app = Flask(__name__)
 
 # Put in your the api_key here
-api_key = ''
+api_key = 'Iu6RMASUHPZgnXkTKsopdmBGiQK9ht97MCXkyFX_ciEltMPd3YcleBYZHmMcmlrwSmdJqAf_YOv7-CuzP6L64k1Vo64fLATAqoKVYAGwJ3ddbmQ1YmAzBku_Y9sKYnYx'
 headers = {'Authorization': 'Bearer {}'.format(api_key)}
 search_api_url = 'https://api.yelp.com/v3/businesses/search'
 # params = {}

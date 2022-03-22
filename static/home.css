@@ -34,7 +34,7 @@ body > form > div.group {
     text-align: center;
 }
 
-body > form > div.group > input {
+body > form > div.group > input, body > form > div.group > select {
     width: 50vw;
     background-color: #2d2d30;
     color: white;
