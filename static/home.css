@@ -55,6 +55,7 @@ body > form > div.group > button {
     color: white;
     font-size: 2em;
     border: 0;
+    margin-bottom: 1vh;
 }
 
 body > form > div.group > button:hover {
