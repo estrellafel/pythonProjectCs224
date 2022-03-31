@@ -3,8 +3,6 @@ class Form_Data:
     def __init__(self):
         self.term = None
         self.location = None
-        self.latitude = None
-        self.longitude = None
         self.radius = None
         self.categories = None
         self.price = None
@@ -20,18 +18,6 @@ class Form_Data:
 
     def get_location(self):
         return self.location
-
-    def set_latitude(self, latitude):
-        self.latitude = latitude
-
-    def get_latitude(self):
-        return self.latitude
-
-    def set_longitude(self, longitude):
-        self.longitude = longitude
-
-    def get_longitude(self):
-        return self.longitude
 
     def set_radius(self, radius):
         self.radius = radius

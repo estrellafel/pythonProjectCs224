@@ -6,8 +6,10 @@ Main python file for our flask project
 
 from distutils.log import error
 from random import randint
+from tkinter.tix import Form
 from flask import Flask, render_template, request
 import requests, validate
+from Form_Data import Form_Data
 
 app = Flask(__name__)
 
@@ -25,7 +27,7 @@ def home():
 @app.route('/', methods =["GET", "POST"])
 def get_form():
     # Get input from the form and parse that into a dictionary for the request
-    params = get_params(request.form)
+    params, fd = get_params(request.form)
     if params == None:
         return render_template('home.html', error = error, errorMsg = 'Error while parsing user input!')
     
@@ -35,8 +37,9 @@ def get_form():
         return render_template('home.html', error = error, errorMsg = 'error when getting dictionary response from yelp')
     if data['total'] == 0:
         return render_template('home.html', error = error, errorMsg = 'no businesses found')
+    
     randBusiness = data['businesses'][randint(0,len(data['businesses']) - 1)]
-    print(randBusiness['image_url'])
+
     return render_template('home.html', error = error, name = randBusiness['name'], imgUrl = randBusiness['image_url'])    
 
 # Attempts to get dictionary of valid data.  
@@ -48,7 +51,15 @@ def get_params(form):
     radius = form.get('radius')
     categories = form.get('categories')
     price = form.get('price')
-    
+
+    # Make the form data object for easy of use in flask
+    form_data = Form_Data()
+    form_data.term = term
+    form_data.location = location
+    form_data.radius = radius
+    form_data.categories = categories
+    form_data.price = price
+
     # Parse unvalidated input and store valid input in params dictionary
     params = {}
     params['term'] = term
@@ -67,7 +78,7 @@ def get_params(form):
     if validate.is_valid_int(price): # If a price range is provided, try to use it
             params['price'] = validate.parse_price(price)
     
-    return params
+    return params, form_data
 
 def general_api():
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
