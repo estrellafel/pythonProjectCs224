@@ -10,25 +10,41 @@
                 <label for="term">Food Type</label>
             </div>
             <div class="group">
+                {% if fd %}
+                <input type="text" name="term" id="term" value="{{fd.term}}">
+                {% else %}
                 <input type="text" name="term" id="term">
+                {% endif %}
             </div>
             <div class="group">
                 <label for="location">Location</label>
             </div>
             <div class="group">
+                {% if fd %}
+                <input type="text" name="location" id="location" value="{{fd.location}}">
+                {% else %}
                 <input type="text" name="location" id="location">
+                {% endif %}
             </div>
             <div class="group">
                 <label for="radius">Radius</label>
             </div>
             <div class="group">
+                {% if fd %}
+                <input type="number" name="radius" id="radius" step="any" value="{{fd.radius}}">
+                {% else %}
                 <input type="number" name="radius" id="radius" step="any">
+                {% endif %}
             </div>
             <div class="group">
                 <label for="categories">Categories</label>
             </div>
             <div class="group">
+                {% if fd %}
+                <input type="text" name="categories" id="categories" value="{{fd.categories}}">
+                {% else %}
                 <input type="text" name="categories" id="categories">
+                {% endif %}
             </div>
             <div class="group">
                 <label for="price">Price</label>

@@ -27,7 +27,30 @@ def home():
 @app.route('/', methods =["GET", "POST"])
 def get_form():
     # Get input from the form and parse that into a dictionary for the request
-    params, fd = get_params(request.form)
+    params = get_params(request.form)
+
+    fd = Form_Data()
+    if 'term' in params:
+        fd.term = params['term']
+    else:
+        fd.term = ""
+    if 'location' in params:
+        fd.location = params['location']
+    else:
+        fd.location = ""
+    if 'radius' in params:
+        fd.radius = round(params['radius'] / 1609.344)
+    else:
+        fd.radius = ""
+    if 'categories' in params:
+        fd.categories = params['categories']
+    else:
+        fd.categories = ""
+    if 'price' in params:
+        fd.price = params['price']
+    else:
+        fd.price = ""
+
     if params == None:
         return render_template('home.html', error = error, errorMsg = 'Error while parsing user input!')
     
@@ -40,7 +63,7 @@ def get_form():
     
     randBusiness = data['businesses'][randint(0,len(data['businesses']) - 1)]
 
-    return render_template('home.html', error = error, name = randBusiness['name'], imgUrl = randBusiness['image_url'])    
+    return render_template('home.html', error = error, name = randBusiness['name'], imgUrl = randBusiness['image_url'], fd = fd)    
 
 # Attempts to get dictionary of valid data.  
 # If valid data entered will return the dictionary, otherwise returns None
@@ -51,14 +74,6 @@ def get_params(form):
     radius = form.get('radius')
     categories = form.get('categories')
     price = form.get('price')
-
-    # Make the form data object for easy of use in flask
-    form_data = Form_Data()
-    form_data.term = term
-    form_data.location = location
-    form_data.radius = radius
-    form_data.categories = categories
-    form_data.price = price
 
     # Parse unvalidated input and store valid input in params dictionary
     params = {}
@@ -78,7 +93,7 @@ def get_params(form):
     if validate.is_valid_int(price): # If a price range is provided, try to use it
             params['price'] = validate.parse_price(price)
     
-    return params, form_data
+    return params
 
 def general_api():
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
