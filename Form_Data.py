@@ -1,5 +1,12 @@
+"""
+This is a Form_Data object which will mainly be used for keeping the data that the user
+has entered in the form. This will help allow for fields to be set in the form if the
+user has already entered the data.
 
-class Form_Data:
+@author: Felix Estrella
+"""
+class Form_Data(object):
+    # constructor to set everything to none to start, insert data as form data is grabbed
     def __init__(self):
         self.term = None
         self.location = None

@@ -18,6 +18,7 @@ api_key = 'Iu6RMASUHPZgnXkTKsopdmBGiQK9ht97MCXkyFX_ciEltMPd3YcleBYZHmMcmlrwSmdJq
 headers = {'Authorization': 'Bearer {}'.format(api_key)}
 search_api_url = 'https://api.yelp.com/v3/businesses/search'
 # params = {}
+fd = Form_Data()
 
 @app.route("/")
 def home():
@@ -29,27 +30,8 @@ def get_form():
     # Get input from the form and parse that into a dictionary for the request
     params = get_params(request.form)
 
-    fd = Form_Data()
-    if 'term' in params:
-        fd.term = params['term']
-    else:
-        fd.term = ""
-    if 'location' in params:
-        fd.location = params['location']
-    else:
-        fd.location = ""
-    if 'radius' in params:
-        fd.radius = round(params['radius'] / 1609.344)
-    else:
-        fd.radius = ""
-    if 'categories' in params:
-        fd.categories = params['categories']
-    else:
-        fd.categories = ""
-    if 'price' in params:
-        fd.price = params['price']
-    else:
-        fd.price = ""
+    # Fill the fd object so that it can be passed in the template
+    fill_form_data(params)
 
     if params == None:
         return render_template('home.html', error = error, errorMsg = 'Error while parsing user input!')
@@ -94,6 +76,35 @@ def get_params(form):
             params['price'] = validate.parse_price(price)
     
     return params
+
+""" 
+    Will fill the form data object from what the user entered in the form.
+    Also, is mainly used for ease of use in flask with jinga for keeping fields 
+    full upon enter.
+    @input: params -> dictionary
+    @output: none
+"""
+def fill_form_data(params):
+    if 'term' in params:
+        fd.term = params['term']
+    else:
+        fd.term = ""
+    if 'location' in params:
+        fd.location = params['location']
+    else:
+        fd.location = ""
+    if 'radius' in params:
+        fd.radius = round(params['radius'] / 1609.344)
+    else:
+        fd.radius = ""
+    if 'categories' in params:
+        fd.categories = params['categories']
+    else:
+        fd.categories = ""
+    if 'price' in params:
+        fd.price = params['price']
+    else:
+        fd.price = ""
 
 def general_api():
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
