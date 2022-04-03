@@ -30,22 +30,31 @@ def get_form():
     # Get input from the form and parse that into a dictionary for the request
     params = get_params(request.form)
 
-    # Fill the fd object so that it can be passed in the template
-    fill_form_data(params)
-
     if params == None:
         return render_template('home.html', error = error, errorMsg = 'Error while parsing user input!')
+    elif 'location' not in params.keys():
+        return render_template('home.html', error = error, errorMsg = 'No Location Provided!')
+
+    # Fill the fd object so that it can be passed in the template
+    fill_form_data(params)
     
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
     data = response.json()
     if data is None or 'total' not in data.keys():
-        return render_template('home.html', error = error, errorMsg = 'error when getting dictionary response from yelp')
+        return render_template('home.html', error = error, errorMsg = 'Unable to retrieve data from Yelp API!')
     if data['total'] == 0:
-        return render_template('home.html', error = error, errorMsg = 'no businesses found')
+        return render_template('home.html', error = error, errorMsg = 'No Restaurants Found!')
     
-    randBusiness = data['businesses'][randint(0,len(data['businesses']) - 1)]
+    seen = set()
+    filtered_restaurants = []
+    for restaurant in data['businesses']:
+        if restaurant['name'] not in seen:
+            print(restaurant['name'])
+            seen.add(restaurant['name'])
+            filtered_restaurants.append(restaurant)
+    rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
 
-    return render_template('home.html', error = error, name = randBusiness['name'], imgUrl = randBusiness['image_url'], fd = fd)    
+    return render_template('home.html', error = error, name = rand_restaurant['name'], imgUrl = rand_restaurant['image_url'], fd = fd)    
 
 # Attempts to get dictionary of valid data.  
 # If valid data entered will return the dictionary, otherwise returns None
@@ -64,8 +73,6 @@ def get_params(form):
     
     if location != None and location != '': # If a direct location is available, use that
         params['location'] = location
-    else: # Otherwise throw an error to enter location
-        return render_template('home.html', error = error, errorMsg = 'error when getting dictionary response from yelp')
     
     # For these entries if invalid data is encountered, it is just not included in params
     if validate.is_valid_float(radius): # If a radius is provided, try to use it
