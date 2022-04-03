@@ -49,7 +49,6 @@ def get_form():
     filtered_restaurants = []
     for restaurant in data['businesses']:
         if restaurant['name'] not in seen:
-            print(restaurant['name'])
             seen.add(restaurant['name'])
             filtered_restaurants.append(restaurant)
     rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
