@@ -54,7 +54,7 @@ def get_form():
             filtered_restaurants.append(restaurant)
 
     rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
-
+    res = fill_restaurant(rand_restaurant)
     return render_template('home.html', error = error, name = rand_restaurant['name'], imgUrl = rand_restaurant['image_url'], fd = fd)    
 
 # Attempts to get dictionary of valid data.  
@@ -112,6 +112,14 @@ def fill_form_data(params):
         fd.price = params['price']
     else:
         fd.price = ""
+
+def fill_restaurant(res):
+    retRes = Restaurant(name = res['name'], phone = res['phone'], price = res['price'], url = res['url'])
+    if res['location']['country'] == 'US':
+        location = '{}, {}, {}, {}'.format(res['location']['address1'], res['location']['city'], res['location']['state'], res['location']['zip_code'])
+    else:
+        location = '{}, {}, {}'.format(res['location']['address1'], res['location']['city'], res['location']['country'])
+    return retRes
 
 def general_api():
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
