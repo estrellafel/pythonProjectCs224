@@ -10,6 +10,7 @@ from tkinter.tix import Form
 from flask import Flask, render_template, request
 import requests, validate
 from Form_Data import Form_Data
+from Restaurant import Restaurant
 
 app = Flask(__name__)
 
@@ -18,7 +19,7 @@ api_key = 'Iu6RMASUHPZgnXkTKsopdmBGiQK9ht97MCXkyFX_ciEltMPd3YcleBYZHmMcmlrwSmdJq
 headers = {'Authorization': 'Bearer {}'.format(api_key)}
 search_api_url = 'https://api.yelp.com/v3/businesses/search'
 # params = {}
-fd = Form_Data()
+fd = Form_Data() # Used to keep track of the form data that is entered by the user
 
 @app.route("/")
 def home():
@@ -51,6 +52,7 @@ def get_form():
         if restaurant['name'] not in seen:
             seen.add(restaurant['name'])
             filtered_restaurants.append(restaurant)
+
     rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
 
     return render_template('home.html', error = error, name = rand_restaurant['name'], imgUrl = rand_restaurant['image_url'], fd = fd)    
@@ -85,8 +87,7 @@ def get_params(form):
 
 """ 
     Will fill the form data object from what the user entered in the form.
-    Also, is mainly used for ease of use in flask with jinga for keeping fields 
-    full upon enter.
+    
     @input: params -> dictionary
     @output: none
 """
