@@ -7,12 +7,12 @@ user has already entered the data.
 """
 class Form_Data(object):
     # constructor to set everything to none to start, insert data as form data is grabbed
-    def __init__(self):
-        self.term = None
-        self.location = None
-        self.radius = None
-        self.categories = None
-        self.price = None
+    def __init__(self, term = '', location = '', radius = '', categories = '', price = ''):
+        self.term = term
+        self.location = location
+        self.radius = radius
+        self.categories = categories
+        self.price = price
 
     def set_term(self, term):
         self.term = term

@@ -26,7 +26,7 @@ def home():
     #general_api()
     return render_template('home.html', error = error)
 
-@app.route('/', methods =["GET", "POST"])
+@app.route('/restaurant', methods =["GET", "POST"])
 def get_form():
     # Get input from the form and parse that into a dictionary for the request
     params = get_params(request.form)
@@ -54,9 +54,15 @@ def get_form():
             filtered_restaurants.append(restaurant)
 
     rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
-    res = fill_restaurant(rand_restaurant)
-    return render_template('home.html', error = error, name = rand_restaurant['name'], imgUrl = rand_restaurant['image_url'], fd = fd)    
 
+    res = fill_restaurant(rand_restaurant)
+    
+    return render_template('restaurant.html', restaurant = res)
+    #return render_template('home.html', error = error, name = rand_restaurant['name'], imgUrl = rand_restaurant['image_url'], fd = fd) 
+
+@app.route('/home', methods =["GET", "POST"])
+def take_back_to_home():
+    return render_template('home.html', fd = fd)    
 # Attempts to get dictionary of valid data.  
 # If valid data entered will return the dictionary, otherwise returns None
 def get_params(form):
