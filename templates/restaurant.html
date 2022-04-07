@@ -1,10 +1,29 @@
 <html> 
     <head>
         <title>Random Restaurant</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='restaurant.css') }}">
     </head>
     <body>
-        <h1 id="rName">{{restaurant.name}}</h1>
+        <div class="restaurant">
+            <div class="item">
+                <h2 class="r_name">{{restaurant.name}}</h2>
+            </div>
+            <div class="item"> 
+                <p class="r_location">{{restaurant.location}}</p>
+            </div>
+            <div class="item"> 
+                <p class="r_phone">Phone Number: {{restaurant.phone}}</p>
+            </div>
+            <div class="item"> 
+                <p class="r_price">{{restaurant.price}}</p>
+            </div>
+            <div class="item"> 
+                <p class="r_url">{{restaurant.url}}</p>
+            </div>
+            <div class="item"> 
+                <p class="r_location">{{restaurant.location}}</p>
+            </div>
+        </div>
         <a href="/home">Back</a>
     </body>
 </html>

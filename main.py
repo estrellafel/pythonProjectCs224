@@ -57,8 +57,8 @@ def get_form():
 
     res = fill_restaurant(rand_restaurant)
 
-    #return render_template('restaurant.html', restaurant = res)
-    return render_template('home.html', error = error, name = rand_restaurant['name'], imgUrl = rand_restaurant['image_url'], fd = fd) 
+    return render_template('restaurant.html', restaurant = res)
+    #return render_template('home.html', error = error, name = rand_restaurant['name'], imgUrl = rand_restaurant['image_url'], fd = fd) 
 
 @app.route('/home', methods =["GET", "POST"])
 def take_back_to_home():
@@ -126,6 +126,7 @@ def fill_restaurant(res):
         location = '{}, {}, {}, {}'.format(res['location']['address1'], res['location']['city'], res['location']['state'], res['location']['zip_code'])
     else:
         location = '{}, {}, {}'.format(res['location']['address1'], res['location']['city'], res['location']['country'])
+    retRes.set_location(location)
     return retRes
 
 def general_api():

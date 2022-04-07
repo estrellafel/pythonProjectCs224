@@ -1,0 +1,17 @@
+body {
+    background-color: #2d2d30;
+}
+body > div.restaurant {
+    background-color: white;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items:center;
+    width: 60vw;
+    margin: auto;
+}
+
+body > div.restaurant > div.item {
+    width: 100%;
+    text-align: center;
+}
