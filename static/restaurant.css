@@ -1,3 +1,7 @@
+*, html {
+    padding: 0;
+    margin: 0;
+}
 body {
     background-color: #2d2d30;
 }
@@ -14,4 +18,39 @@ body > div.restaurant {
 body > div.restaurant > div.item {
     width: 100%;
     text-align: center;
+    margin-bottom: 2vh;
+}
+
+body > div.restaurant > div.item > h2.r_name {
+    color: black;
+    font-size: 2em;
+}
+
+body > div.restaurant > div.item > p.r_location {
+    color: black;
+    font-size: 1.5em;
+}
+
+body > div.restaurant > div.item > p.r_phone {
+    color: black;
+    font-size: 1.5em;
+}
+
+body > div.restaurant > div.item > p.r_price {
+    color: black;
+    font-size: 1.5em;
+}
+
+body > div.restaurant > div.item > a.r_url {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    background-color: black;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+}
+
+body > div.restaurant > div.item > a.r_url:hover {
+    background-color: gray;
+    cursor: pointer;
 }
