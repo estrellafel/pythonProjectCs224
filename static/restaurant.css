@@ -5,6 +5,31 @@
 body {
     background-color: #2d2d30;
 }
+
+body > nav {
+    width: 100%;
+    background-color: #2d2d30;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+}
+
+body > nav > a {
+    font-size: 1.5em;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    text-align: center;
+    background-color: #2d2d30;
+    text-decoration: none;
+    color: white;
+}
+
+body > nav > a:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
 body > div.restaurant {
     background-color: white;
     display: flex;
@@ -13,6 +38,7 @@ body > div.restaurant {
     align-items:center;
     width: 60vw;
     margin: auto;
+    margin-top: 1vh;
 }
 
 body > div.restaurant > div.item {
