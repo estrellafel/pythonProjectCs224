@@ -7,22 +7,32 @@
         <nav>
             <a href="/home">Back</a>
         </nav>
-        <div class="restaurant">
-            <div class="item">
-                <h2 class="r_name">{{restaurant.name}}</h2>
+        {% if error %}
+            <h1 id="error">An error has occured in the program!</h1>
+        {% else %} 
+            <div class="restaurant">
+                <div class="item">
+                    <h2 class="r_name">{{restaurant.name}}</h2>
+                </div>
+                <div class="item"> 
+                    <p class="r_location">Location: {{restaurant.location}}</p>
+                </div>
+                <div class="item"> 
+                    <p class="r_phone">Phone Number: {{restaurant.phone}}</p>
+                </div>
+                <div class="item"> 
+                    <p class="r_price">Price ($ - $$$$): {{restaurant.price}}</p>
+                </div>
+                <div class="item"> 
+                    <a href="{{restaurant.url}}">Website</a>
+                </div>
+                <div class="item">
+                    <a href="/choose_again" class="user_option">Choose Again</a>
+                </div>
+                <div class="item">
+                    <a href="/" class="user_option">Save Restaurant</a>
+                </div>
             </div>
-            <div class="item"> 
-                <p class="r_location">Location: {{restaurant.location}}</p>
-            </div>
-            <div class="item"> 
-                <p class="r_phone">Phone Number: {{restaurant.phone}}</p>
-            </div>
-            <div class="item"> 
-                <p class="r_price">Price ($ - $$$$): {{restaurant.price}}</p>
-            </div>
-            <div class="item"> 
-                <a href="{{restaurant.url}}" class="r_url">&nbsp&nbspWebsite&nbsp&nbsp</p>
-            </div>
-        </div>
+        {% endif %}
     </body>
 </html>

@@ -26,6 +26,41 @@ def home():
     #general_api()
     return render_template('home.html', error = error)
 
+@app.route("/choose_again")
+def choose_again():
+    params = dict()
+    if fd.get_term() != '':
+        params['term'] = fd.get_term()
+    if fd.get_location() != '':
+        params['location'] = fd.get_location()
+    if fd.get_categories() != '':
+        params['categories'] != fd.get_categories()
+    if fd.get_radius() != '':
+        params['radius'] = fd.get_radius()
+    if fd.get_price() != '':
+        params['price'] = fd.get_price()
+
+    response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
+    data = response.json()
+    if data is None or 'total' not in data.keys():
+        return render_template('restaurant.html', error = True)
+    if data['total'] == 0:
+        return render_template('restaurant.html', error = True)
+    
+    seen = set()
+    filtered_restaurants = []
+    for restaurant in data['businesses']:
+        if restaurant['name'] not in seen:
+            seen.add(restaurant['name'])
+            filtered_restaurants.append(restaurant)
+
+    rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
+
+    res = fill_restaurant(rand_restaurant)
+
+    return render_template('restaurant.html', restaurant = res)
+
+
 @app.route('/restaurant', methods =["GET", "POST"])
 def get_form():
     # Get input from the form and parse that into a dictionary for the request
@@ -56,9 +91,7 @@ def get_form():
     rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
 
     res = fill_restaurant(rand_restaurant)
-
     return render_template('restaurant.html', restaurant = res)
-    #return render_template('home.html', error = error, name = rand_restaurant['name'], imgUrl = rand_restaurant['image_url'], fd = fd) 
 
 @app.route('/home', methods =["GET", "POST"])
 def take_back_to_home():
