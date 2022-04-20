@@ -11,6 +11,7 @@ from flask import Flask, render_template, request
 import requests, validate
 from Form_Data import Form_Data
 from Restaurant import Restaurant
+from copy import deepcopy
 
 app = Flask(__name__)
 
@@ -20,14 +21,16 @@ headers = {'Authorization': 'Bearer {}'.format(api_key)}
 search_api_url = 'https://api.yelp.com/v3/businesses/search'
 # params = {}
 fd = Form_Data() # Used to keep track of the form data that is entered by the user
+saved_restaurants = []
+current_restaurant = None
 
 @app.route("/")
 def home():
-    #general_api()
     return render_template('home.html', error = error)
 
 @app.route("/choose_again")
 def choose_again():
+    global current_restaurant, saved_restaurants, api_key, headers, search_api_url, fd
     params = dict()
     params['term'] = fd.get_term()
     params['limit'] = 50
@@ -44,9 +47,9 @@ def choose_again():
     data = response.json()
 
     if data is None or 'total' not in data.keys():
-        return render_template('restaurant.html', error = True)
+        return render_template('restaurant.html', error = True, saved = saved_restaurants)
     if data['total'] == 0:
-        return render_template('restaurant.html', error = True)
+        return render_template('restaurant.html', error = True, saved = saved_restaurants)
     
     seen = set()
     filtered_restaurants = []
@@ -58,12 +61,20 @@ def choose_again():
     rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
 
     res = fill_restaurant(rand_restaurant)
+    current_restaurant = deepcopy(res)
+    return render_template('restaurant.html', restaurant = res, saved = saved_restaurants)
 
-    return render_template('restaurant.html', restaurant = res)
-
+@app.route('/saved')
+def save_restuarant():
+    global current_restaurant, saved_restaurants
+    if current_restaurant != None:
+        saved_restaurants.append(deepcopy(current_restaurant))
+    print(current_restaurant)
+    return render_template('restaurant.html', restaurant = current_restaurant, saved = saved_restaurants)
 
 @app.route('/restaurant', methods =["GET", "POST"])
 def get_form():
+    global current_restaurant, saved_restaurants, api_key, headers, search_api_url, fd
     # Get input from the form and parse that into a dictionary for the request
     params = get_params(request.form)
 
@@ -92,10 +103,12 @@ def get_form():
     rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
 
     res = fill_restaurant(rand_restaurant)
-    return render_template('restaurant.html', restaurant = res)
+    current_restaurant = deepcopy(res)
+    return render_template('restaurant.html', restaurant = res, saved = saved_restaurants)
 
 @app.route('/home', methods =["GET", "POST"])
 def take_back_to_home():
+    global fd
     return render_template('home.html', fd = fd) 
 
 # Attempts to get dictionary of valid data.  
@@ -133,6 +146,7 @@ def get_params(form):
     @output: none
 """
 def fill_form_data(params):
+    global fd
     if 'term' in params:
         fd.term = params['term']
     else:
