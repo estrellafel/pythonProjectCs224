@@ -75,6 +75,12 @@ def save_restuarant():
         saved_restaurants.append(deepcopy(current_restaurant))
     return render_template('restaurant.html', restaurant = current_restaurant, saved = saved_restaurants, len = len(saved_restaurants))
 
+@app.route('/clear')
+def clear_restuarants():
+    global saved_restaurants
+    saved_restaurants = []
+    return render_template('restaurant.html', restaurant = current_restaurant, saved = saved_restaurants, len = len(saved_restaurants))
+
 @app.route('/restaurant', methods =["GET", "POST"])
 def get_form():
     global current_restaurant, saved_restaurants, api_key, headers, search_api_url, fd
