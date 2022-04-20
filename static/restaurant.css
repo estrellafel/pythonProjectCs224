@@ -23,11 +23,11 @@ h2 {
 }
 
 h3{
-    font-size: 1.5em;
+    font-size: 1.75em;
     color: gold;
     margin: 0 auto;
-    text-align: left;
-    padding-top: 5vw;
+    text-align: center;
+    padding-top: 3vw;
     padding-bottom: 1vw;
     padding-left: 2vw;
 }
