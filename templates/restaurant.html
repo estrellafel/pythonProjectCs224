@@ -16,13 +16,13 @@
                     <h2 class="r_name">{{restaurant.name}}</h2>
                 </div>
                 <div class="item"> 
-                    <p class="r_location">Location: <u>{{restaurant.location}}</u></p>
+                    <p class="r_location">Location: {{restaurant.location}}</p>
                 </div>
                 <div class="item"> 
-                    <p class="r_phone">Phone Number: <u>{{restaurant.phone}}</u></p>
+                    <p class="r_phone">Phone Number: {{restaurant.phone}}</p>
                 </div>
                 <div class="item"> 
-                    <p class="r_price">Price ($ - $$$$): <u>{{restaurant.price}}</u></p>
+                    <p class="r_price">Price ($ - $$$$): {{restaurant.price}}</p>
                 </div>
                 <div class="item"> 
                     <a href="{{restaurant.url}}">Website</a>
@@ -32,20 +32,20 @@
             </div>
         {% endif %}
         {% if saved %} 
-            <h3>Saved Restaurants: </h3>
+            <h3>Saved Restaurants </h3>
             {% for i in range(len) %}
                 <div class="restaurant2">
                     <div class="item">
                         <h2 class="r_name">{{saved[i].name}}</h2>
                     </div>
                     <div class="item"> 
-                        <p class="r_location">Location:   <u>{{saved[i].location}}</u></p>
+                        <p class="r_location">Location:  {{saved[i].location}}</p>
                     </div>
                     <div class="item"> 
-                        <p class="r_phone">Phone Number:   <u>{{saved[i].phone}}</u></p>
+                        <p class="r_phone">Phone Number:  {{saved[i].phone}}</p>
                     </div>
                     <div class="item"> 
-                        <p class="r_price">Price ($ - $$$$):   <u>{{saved[i].price}}</u></p>
+                        <p class="r_price">Price ($ - $$$$):  {{saved[i].price}}</p>
                     </div>
                     <div class="item"> 
                         <a href="{{saved[i].url}}">Website</a>
