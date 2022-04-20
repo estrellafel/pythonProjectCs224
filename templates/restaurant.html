@@ -27,8 +27,8 @@
                 <div class="item"> 
                     <a href="{{restaurant.url}}">Website</a>
                     <a href="/choose_again" class="user_option">Choose Again</a>
-                    <a href="/saved" class="user_option">Save Restaurant</a>
-                    <a href="/clear" class="user_option">Clear Saved Restaurants</a>
+                    <a href="/saved" class="user_option">Save</a>
+                    <a href="/clear_all" class="user_option">Clear Saved</a>
                 </div>
             </div>
         {% endif %}
@@ -50,6 +50,7 @@
                     </div>
                     <div class="item"> 
                         <a href="{{saved[i].url}}">Website</a>
+                        <a href="/clear/{{saved[i].name}}">Remove</a>
                     </div>
                 </div>
             {% endfor %}
