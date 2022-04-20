@@ -29,19 +29,20 @@ def home():
 @app.route("/choose_again")
 def choose_again():
     params = dict()
-    if fd.get_term() != '':
-        params['term'] = fd.get_term()
+    params['term'] = fd.get_term()
+    params['limit'] = 50
     if fd.get_location() != '':
         params['location'] = fd.get_location()
     if fd.get_categories() != '':
         params['categories'] != fd.get_categories()
     if fd.get_radius() != '':
-        params['radius'] = fd.get_radius()
+        params['radius'] = int(min(max(float(fd.get_radius()) * 1609.34, 0), 40000))
     if fd.get_price() != '':
         params['price'] = fd.get_price()
 
     response = requests.get(search_api_url, headers=headers, params=params, timeout=10)
     data = response.json()
+
     if data is None or 'total' not in data.keys():
         return render_template('restaurant.html', error = True)
     if data['total'] == 0:
@@ -117,11 +118,11 @@ def get_params(form):
     
     # For these entries if invalid data is encountered, it is just not included in params
     if validate.is_valid_float(radius): # If a radius is provided, try to use it
-            params['radius'] = int(min(max(float(radius) * 1609.34, 0), 40000)) 
+        params['radius'] = int(min(max(float(radius) * 1609.34, 0), 40000)) 
     if categories != None and categories != '': # If a category is provided, use it
         params['categories'] = categories
     if validate.is_valid_int(price): # If a price range is provided, try to use it
-            params['price'] = validate.parse_price(price)
+        params['price'] = validate.parse_price(price)
     
     return params
 
