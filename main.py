@@ -5,7 +5,7 @@ Main python file for our flask project
 """
 
 from distutils.log import error
-from random import randint
+from random import randint, shuffle
 from tkinter.tix import Form
 from flask import Flask, render_template, request
 import requests, validate
@@ -58,16 +58,20 @@ def choose_again():
             seen.add(restaurant['name'])
             filtered_restaurants.append(restaurant)
 
-    rand_restaurant = filtered_restaurants[randint(0, len(filtered_restaurants) - 1)]
-
-    res = fill_restaurant(rand_restaurant)
-    current_restaurant = deepcopy(res)
-    return render_template('restaurant.html', restaurant = res, saved = saved_restaurants, len = len(saved_restaurants))
+    cur = 0
+    choose = None
+    shuffle(filtered_restaurants)
+    while choose is not current_restaurant and cur <= len(filtered_restaurants) - 1:
+        rand_restaurant = filtered_restaurants[cur]
+        choose = fill_restaurant(rand_restaurant)
+        cur += 1
+    current_restaurant = deepcopy(choose)
+    return render_template('restaurant.html', restaurant = choose, saved = saved_restaurants, len = len(saved_restaurants))
 
 @app.route('/saved')
 def save_restuarant():
     global current_restaurant, saved_restaurants
-    if current_restaurant != None:
+    if current_restaurant != None and current_restaurant not in saved_restaurants:
         saved_restaurants.append(deepcopy(current_restaurant))
     return render_template('restaurant.html', restaurant = current_restaurant, saved = saved_restaurants, len = len(saved_restaurants))
 

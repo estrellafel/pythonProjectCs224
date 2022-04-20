@@ -14,6 +14,12 @@ class Restaurant(object):
         self.url = url
         self.location = location
     
+    def __eq__(self, other):
+        return other != None and self.name == other.name and self.location == other.location
+    
+    def __str__(self):
+        return self.name + ": " + self.phone
+    
     def set_name(self, name):
         self.name = name
 
