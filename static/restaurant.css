@@ -4,11 +4,12 @@
 }
 
 body {
-    background-color: #2d2d30;
+    background-color: #1d1b26;
 }
 
 h1 {
-    color: red;
+    font-size: 6vh;
+    color: orangered;
     margin: 0 auto;
     text-align: center;
     margin-bottom: 4vh;
@@ -21,9 +22,19 @@ h2 {
     margin-bottom: 3vh;
 }
 
+h3{
+    font-size: 1.5em;
+    color: gold;
+    margin: 0 auto;
+    text-align: left;
+    padding-top: 5vw;
+    padding-bottom: 1vw;
+    padding-left: 2vw;
+}
+
 body > nav {
     width: 100%;
-    background-color: #2d2d30;
+    background-color: #1d1b26;
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
 }
@@ -35,9 +46,12 @@ body > nav > a {
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
     text-align: center;
-    background-color: #2d2d30;
+    background-color: #1d1b26;
     text-decoration: none;
     color: white;
+    border: 0.5vh;
+    border-style: solid;
+    border-color: white;
 }
 
 body > nav > a:hover {
@@ -54,6 +68,10 @@ body > div.restaurant {
     width: 60vw;
     margin: auto;
     margin-top: 1vh;
+    border: .75vh;
+    border-style: solid;
+    border-radius: .75vh;
+    border-color: orangered;
 }
 
 body > div.restaurant > div.item {
@@ -63,22 +81,22 @@ body > div.restaurant > div.item {
 }
 
 body > div.restaurant > div.item > h2.r_name {
-    color: black;
+    color: #1d1b26;
     font-size: 2em;
 }
 
 body > div.restaurant > div.item > p.r_location {
-    color: black;
+    color: #1d1b26;
     font-size: 1.5em;
 }
 
 body > div.restaurant > div.item > p.r_phone {
-    color: black;
+    color: #1d1b26;
     font-size: 1.5em;
 }
 
 body > div.restaurant > div.item > p.r_price {
-    color: black;
+    color: #1d1b26;
     font-size: 1.5em;
 }
 
@@ -86,7 +104,7 @@ body > div.restaurant > div.item > a {
     color: white;
     text-decoration: none;
     font-size: 1.5em;
-    background-color: black;
+    background-color: #1d1b26;
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
     padding-right: 1vw;
@@ -94,6 +112,59 @@ body > div.restaurant > div.item > a {
 }
 
 body > div.restaurant > div.item > a:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
+body > div.restaurant2{
+    background-color: white;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items:center;
+    width: 40vw;
+    margin: auto;
+    margin-top: 1vh;
+}
+
+body > div.restaurant2 > div.item {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2vh;
+}
+
+body > div.restaurant2 > div.item > h2.r_name {
+    color: #1d1b26;
+    font-size: 1.75em;
+}
+
+body > div.restaurant2 > div.item > p.r_location {
+    color: #1d1b26;
+    font-size: 1.25em;
+}
+
+body > div.restaurant2 > div.item > p.r_phone {
+    color: #1d1b26;
+    font-size: 1.25em;
+}
+
+body > div.restaurant2 > div.item > p.r_price {
+    color: #1d1b26;
+    font-size: 1.25em;
+}
+
+body > div.restaurant2 > div.item > a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.25em;
+    background-color: #1d1b26;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    padding-right: 1vw;
+    padding-left: 1vw;
+}
+
+body > div.restaurant2 > div.item > a:hover {
     background-color: gray;
     cursor: pointer;
 }

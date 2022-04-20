@@ -16,40 +16,36 @@
                     <h2 class="r_name">{{restaurant.name}}</h2>
                 </div>
                 <div class="item"> 
-                    <p class="r_location">Location: {{restaurant.location}}</p>
+                    <p class="r_location">Location: <u>{{restaurant.location}}</u></p>
                 </div>
                 <div class="item"> 
-                    <p class="r_phone">Phone Number: {{restaurant.phone}}</p>
+                    <p class="r_phone">Phone Number: <u>{{restaurant.phone}}</u></p>
                 </div>
                 <div class="item"> 
-                    <p class="r_price">Price ($ - $$$$): {{restaurant.price}}</p>
+                    <p class="r_price">Price ($ - $$$$): <u>{{restaurant.price}}</u></p>
                 </div>
                 <div class="item"> 
                     <a href="{{restaurant.url}}">Website</a>
-                </div>
-                <div class="item">
                     <a href="/choose_again" class="user_option">Choose Again</a>
-                </div>
-                <div class="item">
                     <a href="/saved" class="user_option">Save Restaurant</a>
                 </div>
             </div>
         {% endif %}
         {% if saved %} 
-            <h2>Saved Restaurants</h2>
+            <h3>Saved Restaurants: </h3>
             {% for i in range(len) %}
-                <div class="restaurant">
+                <div class="restaurant2">
                     <div class="item">
                         <h2 class="r_name">{{saved[i].name}}</h2>
                     </div>
                     <div class="item"> 
-                        <p class="r_location">Location: {{saved[i].location}}</p>
+                        <p class="r_location">Location:   <u>{{saved[i].location}}</u></p>
                     </div>
                     <div class="item"> 
-                        <p class="r_phone">Phone Number: {{saved[i].phone}}</p>
+                        <p class="r_phone">Phone Number:   <u>{{saved[i].phone}}</u></p>
                     </div>
                     <div class="item"> 
-                        <p class="r_price">Price ($ - $$$$): {{saved[i].price}}</p>
+                        <p class="r_price">Price ($ - $$$$):   <u>{{saved[i].price}}</u></p>
                     </div>
                     <div class="item"> 
                         <a href="{{saved[i].url}}">Website</a>
