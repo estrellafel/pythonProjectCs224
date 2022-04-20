@@ -7,6 +7,7 @@
         <nav>
             <a href="/home">Back</a>
         </nav>
+        <h1>Funky Fresh Finder</h1>
         {% if error %}
             <h1 id="error">An error has occured in the program!</h1>
         {% else %} 
@@ -35,7 +36,26 @@
             </div>
         {% endif %}
         {% if saved %} 
-            <h1>YES<h1>
+            <h2>Saved Restaurants</h2>
+            {% for i in range(len) %}
+                <div class="restaurant">
+                    <div class="item">
+                        <h2 class="r_name">{{saved[i].name}}</h2>
+                    </div>
+                    <div class="item"> 
+                        <p class="r_location">Location: {{saved[i].location}}</p>
+                    </div>
+                    <div class="item"> 
+                        <p class="r_phone">Phone Number: {{saved[i].phone}}</p>
+                    </div>
+                    <div class="item"> 
+                        <p class="r_price">Price ($ - $$$$): {{saved[i].price}}</p>
+                    </div>
+                    <div class="item"> 
+                        <a href="{{saved[i].url}}">Website</a>
+                    </div>
+                </div>
+            {% endfor %}
         {% endif %}
     </body>
 </html>

@@ -47,9 +47,9 @@ def choose_again():
     data = response.json()
 
     if data is None or 'total' not in data.keys():
-        return render_template('restaurant.html', error = True, saved = saved_restaurants)
+        return render_template('restaurant.html', error = True, saved = saved_restaurants, len = len(saved_restaurants))
     if data['total'] == 0:
-        return render_template('restaurant.html', error = True, saved = saved_restaurants)
+        return render_template('restaurant.html', error = True, saved = saved_restaurants, len = len(saved_restaurants))
     
     seen = set()
     filtered_restaurants = []
@@ -62,15 +62,14 @@ def choose_again():
 
     res = fill_restaurant(rand_restaurant)
     current_restaurant = deepcopy(res)
-    return render_template('restaurant.html', restaurant = res, saved = saved_restaurants)
+    return render_template('restaurant.html', restaurant = res, saved = saved_restaurants, len = len(saved_restaurants))
 
 @app.route('/saved')
 def save_restuarant():
     global current_restaurant, saved_restaurants
     if current_restaurant != None:
         saved_restaurants.append(deepcopy(current_restaurant))
-    print(current_restaurant)
-    return render_template('restaurant.html', restaurant = current_restaurant, saved = saved_restaurants)
+    return render_template('restaurant.html', restaurant = current_restaurant, saved = saved_restaurants, len = len(saved_restaurants))
 
 @app.route('/restaurant', methods =["GET", "POST"])
 def get_form():
@@ -104,7 +103,7 @@ def get_form():
 
     res = fill_restaurant(rand_restaurant)
     current_restaurant = deepcopy(res)
-    return render_template('restaurant.html', restaurant = res, saved = saved_restaurants)
+    return render_template('restaurant.html', restaurant = res, saved = saved_restaurants, len = len(saved_restaurants))
 
 @app.route('/home', methods =["GET", "POST"])
 def take_back_to_home():
