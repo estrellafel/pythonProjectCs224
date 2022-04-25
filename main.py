@@ -1,7 +1,8 @@
 """
-Main python file for our flask project
+Main python file for our flask project. This is where all the application
+routing happens and where the html files are rendered.
 
-@author: Felix Estrella, Jackson Goth, Shivani Ganesh, Eric Bal
+@author: Felix Estrella, Jackson Goth, Shivani Ganesh, and Eric Bal
 """
 
 from distutils.log import error

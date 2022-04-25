@@ -3,7 +3,7 @@ This will be used to keep track of certian restruant data to be displayed in Fla
 Restraunt object will make it much easier to only pass into Flask the information we want 
 rather than the entire dictionary which is passed obtained from yelp.
 
-@author: Felix Estrella
+@author: Felix Estrella and Jackson Goth
 """
 
 class Restaurant(object):
