@@ -1,5 +1,5 @@
 body {
-    background-color: #2d2d30;
+    background-color: #1d1b26;
 }
 h1 {
     font-size: 6vh;
@@ -11,7 +11,8 @@ h1 {
 
 h2 {
     font-size: 2em;
-    color: blue;
+    text-align: center;
+    color: orangered;
 }
 
 div > img.yelpImg {
@@ -37,7 +38,7 @@ body > form > div.group {
 
 body > form > div.group > input, body > form > div.group > select {
     width: 50vw;
-    background-color: #2d2d30;
+    background-color: #1d1b26;
     color: white;
     margin: auto;
     display: block;
@@ -47,12 +48,12 @@ body > form > div.group > input, body > form > div.group > select {
 }
 
 body > form > div.group > label {
-    color: black;
+    color: #1d1b26;
     font-size: 2em;
 }
 
 body > form > div.group > button {
-    background-color: #2d2d30;
+    background-color: #1d1b26;
     color: white;
     font-size: 2em;
     border: 0;
