@@ -37,7 +37,7 @@ def choose_again():
     if fd.get_location() != '':
         params['location'] = fd.get_location()
     if fd.get_categories() != '':
-        params['categories'] != fd.get_categories()
+        params['categories'] = fd.get_categories()
     if fd.get_radius() != '':
         params['radius'] = int(min(max(float(fd.get_radius()) * 1609.34, 0), 40000))
     if fd.get_price() != '':

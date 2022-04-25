@@ -6,7 +6,8 @@ user has already entered the data.
 @author: Felix Estrella
 """
 class Form_Data(object):
-    # constructor to set everything to none to start, insert data as form data is grabbed
+    # constructor to set everything to the empty string to start. Parameters can be
+    # set for each object too.
     def __init__(self, term = '', location = '', radius = '', categories = '', price = ''):
         self.term = term
         self.location = location
