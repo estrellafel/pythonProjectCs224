@@ -1,3 +1,8 @@
+"""
+Python file that contains static function that can be used for validating input from the user.
+
+@author: Jackson Goth
+"""
 
 # Return True if float is actually a float, False otherwise
 def is_valid_float(i):
