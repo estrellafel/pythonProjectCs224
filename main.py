@@ -7,7 +7,6 @@ routing happens and where the html files are rendered.
 
 from distutils.log import error
 from random import randint, shuffle
-from tkinter.tix import Form
 from flask import Flask, render_template, request
 import requests, validate
 from form_data import Form_Data
