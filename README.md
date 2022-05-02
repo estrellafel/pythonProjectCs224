@@ -9,15 +9,15 @@ Here is what needs to be installed to run the program
 * [MORE]()
 
 Assuming python3 and [pip](https://pip.pypa.io/en/stable/installation/) is installed and used you can run the shell script to install the dependencies.
-'''bash
+```bash
 ./downloads.sh
-'''
+```
 
 May need to change file permissions to run shell script as done below
-'''bash
+```bash
 chmod +x downloads.sh
-'''
+```
 # Run
-'''bash
+```bash
 python3 main.py
-'''
+```
