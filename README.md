@@ -21,6 +21,10 @@ chmod +x downloads.sh
 ```
 
 ## Run
+To run the program put in the following command in the terminal.
+
 ```bash
 python3 main.py
 ```
+
+This will allow the user to see and interact with the program [here](http://127.0.0.1:5000/).
