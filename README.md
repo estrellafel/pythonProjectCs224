@@ -1,5 +1,5 @@
 # Funky Fresh Food Finder
-Description
+The purpose of this application is to enable a user to be able generate a random restaurant suggestion based off their selected criteria. The user is able to enter different information such as location, food type, category, radius, and price point to pin down certain restraints for the type of restaurants that may be returned. After the user selects their critera, one restaurant will be returned to the user with information such as the name, address, price point, and website (if applicable). The user has an option to save their generated result and reroll for a new random restaurant. They can save as many as they want and later delete a specific saved restaurant or clear all the saved results.
 
 # Installation
 Here is what needs to be installed to run the program
